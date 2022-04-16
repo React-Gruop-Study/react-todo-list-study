@@ -6,22 +6,17 @@ export const TodoInput = () => {
 
     const [inputText, setInputText] = useState('');
 
-    const inputRef = useRef();
-    const $inputElement = () => inputRef.current;
+    const $inputRef = useRef();
 
     useEffect(() => {
-        $inputElement().focus();
+        $inputRef.current.focus();
     }, []);
-
-    useEffect(() => {
-        $inputElement().value = inputText;
-    }, [inputText]);
 
     const handleSubmitInput = event => {
         event.preventDefault();
 
         if (!inputText) {
-            $inputElement().focus();
+            $inputRef.current.focus();
             return alert('할일을 입력하세요');
         }
 
@@ -36,7 +31,8 @@ export const TodoInput = () => {
     return (
         <form className="add-items d-flex" onSubmit={handleSubmitInput}>
             <input type="text"
-                   ref={inputRef}
+                   ref={$inputRef}
+                   value={inputText}
                    id="input"
                    className="form-control todo-list-input"
                    placeholder="해야 할 일을 입력하세요"
