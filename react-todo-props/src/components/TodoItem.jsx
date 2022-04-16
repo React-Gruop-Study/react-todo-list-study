@@ -1,15 +1,20 @@
 import {useState} from "react";
 import {TodoModify} from "./TodoModify";
+import {useTodoContext} from "../hooks/useTodoContext";
 
-export const TodoItem = ({text, check = false, onChangeCheck, onSubmitModify, onClickRemove}) => {
-    const [checked, setChecked] = useState(check);
+export const TodoItem = ({todo}) => {
+    const {update, remove} = useTodoContext();
+    
+    const [checked, setChecked] = useState(todo.checked);
 
     const handleChangeCheck = ({target: {checked}}) => {
         setChecked(checked);
-        onChangeCheck(checked);
+        update(todo, {checked});
     }
-    const handleClickRemove = () => onClickRemove();
-    const handleSubmitModify = text => onSubmitModify(text);
+
+    const handleClickRemove = () => {
+        remove(todo);
+    };
 
     return (
         <>
@@ -23,12 +28,11 @@ export const TodoItem = ({text, check = false, onChangeCheck, onSubmitModify, on
                     <i className="input-helper"/>
                 </label>
 
-                <TodoModify text={text} onSubmitModify={handleSubmitModify}/>
+                <TodoModify todo={todo}/>
             </div>
 
             <i className="remove mdi mdi-close-circle-outline"
-               onClick={handleClickRemove}
-               role="removeTodo"/>
+               onClick={handleClickRemove} role="removeTodo"/>
         </>
     )
 }

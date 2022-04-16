@@ -1,11 +1,14 @@
 import {useState} from "react";
+import {useTodoContext} from "../hooks/useTodoContext";
 
-export const TodoModify = ({text, onSubmitModify}) => {
+export const TodoModify = ({todo}) => {
+    const {update} = useTodoContext();
+    
     const [modifyAble, setModifyAble] = useState(false);
     const [modifyInput, setModifyInput] = useState('');
 
     const toggleModifyAble = () => {
-        setModifyInput(text);
+        setModifyInput(todo.message);
         setModifyAble(!modifyAble);
     }
 
@@ -16,13 +19,13 @@ export const TodoModify = ({text, onSubmitModify}) => {
     const handleSubmitModify = e => {
         e.preventDefault();
 
-        onSubmitModify(modifyInput);
-
+        if (!modifyInput) return alert('할 일을 입력하세요');
+        update(todo, {message: modifyInput});
         setModifyAble(false);
     }
 
     if (!modifyAble) {
-        return <span onClick={toggleModifyAble}>{text}</span>;
+        return <span onClick={toggleModifyAble}>{todo.message}</span>;
     }
 
     return (

@@ -1,25 +1,8 @@
 import {TodoItem} from "./TodoItem";
+import {useTodoContext} from "../hooks/useTodoContext";
 
-export const TodoList = ({todoList, onClickRemove, onChangeCheck, onSubmitModify}) => {
-    const handleChangeCheck = (todo) => {
-        return checked => {
-            onChangeCheck(todo, checked);
-        };
-    }
-
-    const handleClickRemove = (todo) => {
-        return () => {
-            onClickRemove(todo);
-        };
-    }
-
-    const handleSubmitModify = (todo) => {
-        return text => {
-            if (!text) return alert('할 일을 입력하세요');
-
-            onSubmitModify(todo, text);
-        };
-    }
+export const TodoList = () => {
+    const {todoList} = useTodoContext();
 
     return (
         <div className="list-wrapper">
@@ -27,11 +10,7 @@ export const TodoList = ({todoList, onClickRemove, onChangeCheck, onSubmitModify
                 {todoList.map(todo =>
                     <li role="todoListItem" key={todo.id}>
                         <TodoItem
-                            text={todo.message}
-                            check={todo.checked}
-                            onSubmitModify={handleSubmitModify(todo)}
-                            onChangeCheck={handleChangeCheck(todo)}
-                            onClickRemove={handleClickRemove(todo)}
+                            todo={todo}
                         />
                     </li>
                 )}

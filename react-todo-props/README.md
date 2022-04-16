@@ -62,7 +62,7 @@ export const useTodoList = (initial) => {
 
 ```jsx
 export const TodoContainer = () => {
-    const todoList = useTodoList([]);
+    const todoList = useTodoService([]);
 
     const onSubmitInput = (todo) => todoList.add(todo);
     const onClickRemove = (todo) => todoList.remove(todo);

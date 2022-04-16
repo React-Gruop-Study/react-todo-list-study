@@ -1,6 +1,9 @@
 import {createRef, useEffect, useState} from "react";
+import {useTodoContext} from "../hooks/useTodoContext";
 
-export const TodoInput = ({onSubmitInput}) => {
+export const TodoInput = () => {
+    const {add} = useTodoContext();
+    
     const [inputText, setInputText] = useState('');
 
     const inputRef = createRef();
@@ -22,7 +25,7 @@ export const TodoInput = ({onSubmitInput}) => {
             return alert('할일을 입력하세요');
         }
 
-        onSubmitInput({message: inputText});
+        add({message: inputText});
 
         setInputText('');
     }
