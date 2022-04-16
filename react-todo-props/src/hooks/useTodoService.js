@@ -1,7 +1,7 @@
 import {v4 as uuid} from "uuid";
 import {useEffect, useState} from "react";
 
-class TodoStorage {
+export class TodoStorage {
     STORAGE_KEY = 'todoList';
 
     getList() {
@@ -14,29 +14,35 @@ class TodoStorage {
     }
 }
 
-export const storage = new TodoStorage();
-
-export const useTodoService = () => {
-    const [todoList, setTodoList] = useState(storage.getList());
+export const useTodoService = (todoStorage) => {
+    const [todoList, setTodoList] = useState(getList());
 
     useEffect(() => {
-        storage.save([...todoList]);
+        save([...todoList]);
     }, [todoList]);
 
-    const saveTodo = todo => {
+    function saveTodo(todo) {
         const addTodo = {id: uuid(), checked: false, editState: false, ...todo};
         setTodoList([...todoList, addTodo]);
     }
 
-    const removeTodo = todo => {
+    function removeTodo(todo) {
         todoList.splice(todoList.indexOf(todo), 1);
         setTodoList([...todoList]);
     }
 
-    const updateTodo = (old, newTodo) => {
+    function updateTodo(old, newTodo) {
         const result = [...todoList];
         result.splice(result.indexOf(old), 1, {...old, ...newTodo});
         setTodoList(result);
+    }
+
+    function getList() {
+        return todoStorage.getList();
+    }
+
+    function save(todoList) {
+        todoStorage.save(todoList);
     }
 
     return {todoList, saveTodo, removeTodo, updateTodo}
