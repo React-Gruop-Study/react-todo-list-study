@@ -4,8 +4,8 @@ import {TodoProvider} from "../hooks/useTodoContext";
 import {TodoList} from "./TodoList";
 
 export const TodoContainer = () => {
-    const {todoList, add, remove, update} = useTodoService();
-    const context = {todoList, add, remove, update};
+    const {todoList, saveTodo, removeTodo, updateTodo} = useTodoService();
+    const context = {todoList, saveTodo, removeTodo, updateTodo};
 
     return (
         <TodoProvider value={context}>

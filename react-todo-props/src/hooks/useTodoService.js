@@ -23,21 +23,21 @@ export const useTodoService = () => {
         storage.save([...todoList]);
     }, [todoList]);
 
-    const add = todo => {
+    const saveTodo = todo => {
         const addTodo = {id: uuid(), checked: false, editState: false, ...todo};
         setTodoList([...todoList, addTodo]);
     }
 
-    const remove = todo => {
+    const removeTodo = todo => {
         todoList.splice(todoList.indexOf(todo), 1);
         setTodoList([...todoList]);
     }
 
-    const update = (old, newTodo) => {
+    const updateTodo = (old, newTodo) => {
         const result = [...todoList];
         result.splice(result.indexOf(old), 1, {...old, ...newTodo});
         setTodoList(result);
     }
 
-    return {todoList, add, remove, update}
+    return {todoList, saveTodo, removeTodo, updateTodo}
 }

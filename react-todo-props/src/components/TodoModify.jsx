@@ -2,8 +2,8 @@ import {useState} from "react";
 import {useTodoContext} from "../hooks/useTodoContext";
 
 export const TodoModify = ({todo}) => {
-    const {update} = useTodoContext();
-    
+    const {updateTodo} = useTodoContext();
+
     const [modifyAble, setModifyAble] = useState(false);
     const [modifyInput, setModifyInput] = useState('');
 
@@ -20,7 +20,7 @@ export const TodoModify = ({todo}) => {
         e.preventDefault();
 
         if (!modifyInput) return alert('할 일을 입력하세요');
-        update(todo, {message: modifyInput});
+        updateTodo(todo, {message: modifyInput});
         setModifyAble(false);
     }
 

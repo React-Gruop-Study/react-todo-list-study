@@ -3,17 +3,17 @@ import {TodoModify} from "./TodoModify";
 import {useTodoContext} from "../hooks/useTodoContext";
 
 export const TodoItem = ({todo}) => {
-    const {update, remove} = useTodoContext();
-    
+    const {removeTodo, updateTodo} = useTodoContext();
+
     const [checked, setChecked] = useState(todo.checked);
 
     const handleChangeCheck = ({target: {checked}}) => {
         setChecked(checked);
-        update(todo, {checked});
+        updateTodo(todo, {checked});
     }
 
     const handleClickRemove = () => {
-        remove(todo);
+        removeTodo(todo);
     };
 
     return (
