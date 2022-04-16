@@ -4,15 +4,14 @@ import {useTodoContext} from "../hooks/useTodoContext";
 
 export const TodoItem = ({todo}) => {
     const {removeTodo, updateTodo} = useTodoContext();
-
     const [checked, setChecked] = useState(todo.checked);
 
-    const handleChangeCheck = ({target: {checked}}) => {
+    const updateChecked = ({target: {checked}}) => {
         setChecked(checked);
         updateTodo(todo, {checked});
     }
 
-    const handleClickRemove = () => {
+    const removeTodoItem = () => {
         removeTodo(todo);
     };
 
@@ -23,7 +22,7 @@ export const TodoItem = ({todo}) => {
                     <input className="checkbox"
                            type="checkbox"
                            checked={checked}
-                           onChange={handleChangeCheck}
+                           onChange={updateChecked}
                            role="todoChecked"/>
                     <i className="input-helper"/>
                 </label>
@@ -32,7 +31,7 @@ export const TodoItem = ({todo}) => {
             </div>
 
             <i className="remove mdi mdi-close-circle-outline"
-               onClick={handleClickRemove} role="removeTodo"/>
+               onClick={removeTodoItem} role="removeTodo"/>
         </>
     )
 }
