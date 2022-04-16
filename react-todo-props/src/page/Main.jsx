@@ -1,7 +1,7 @@
 import '../assets/css/App.css';
-import {Layout} from "../layout/Layout";
 import {Header} from "../layout/Header";
-import {TodoContainer} from "../components/TodoContainer";
+import {Layout} from "../layout/Layout";
+import {TodoContainer} from "../@context/components/TodoContainer";
 
 export const Main = () => {
     return (

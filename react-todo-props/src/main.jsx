@@ -4,12 +4,15 @@ import './assets/css/App.css';
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Main} from './page/Main'
+import {RecoilRoot} from "recoil";
+import {Main} from "./page/Main";
 
 const container = document.getElementById('root');
 
 ReactDOM.createRoot(container).render(
     <React.StrictMode>
-        <Main/>
+        <RecoilRoot>
+            <Main/>
+        </RecoilRoot>
     </React.StrictMode>
 )

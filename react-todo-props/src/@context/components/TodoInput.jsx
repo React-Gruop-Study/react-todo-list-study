@@ -1,4 +1,4 @@
-import {createRef, useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useTodoContext} from "../hooks/useTodoContext";
 
 export const TodoInput = () => {
@@ -6,7 +6,7 @@ export const TodoInput = () => {
 
     const [inputText, setInputText] = useState('');
 
-    const inputRef = createRef();
+    const inputRef = useRef();
     const $inputElement = () => inputRef.current;
 
     useEffect(() => {
@@ -25,8 +25,7 @@ export const TodoInput = () => {
             return alert('할일을 입력하세요');
         }
 
-        saveTodo({message: inputText});
-
+        saveTodo({memo: inputText});
         setInputText('');
     }
 

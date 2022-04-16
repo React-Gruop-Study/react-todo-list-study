@@ -8,7 +8,7 @@ export const TodoModify = ({todo}) => {
     const [modifyInput, setModifyInput] = useState('');
 
     const toggleModifyAble = () => {
-        setModifyInput(todo.message);
+        setModifyInput(todo.memo);
         setModifyAble(!modifyAble);
     }
 
@@ -20,12 +20,12 @@ export const TodoModify = ({todo}) => {
         e.preventDefault();
 
         if (!modifyInput) return alert('할 일을 입력하세요');
-        updateTodo(todo, {message: modifyInput});
+        updateTodo(todo, {memo: modifyInput});
         setModifyAble(false);
     }
 
     if (!modifyAble) {
-        return <span onClick={toggleModifyAble}>{todo.message}</span>;
+        return <span onClick={toggleModifyAble}>{todo.memo}</span>;
     }
 
     return (

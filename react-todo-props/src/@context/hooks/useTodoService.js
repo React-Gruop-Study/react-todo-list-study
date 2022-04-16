@@ -1,20 +1,9 @@
 import {v4 as uuid} from "uuid";
 import {useEffect, useState} from "react";
 
-export class TodoStorage {
-    STORAGE_KEY = 'todoList';
+export const useTodoService = (storage) => {
+    const storageKey = 'todoList';
 
-    getList() {
-        const result = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
-        return result ? result : [];
-    }
-
-    save(todoList) {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(todoList));
-    }
-}
-
-export const useTodoService = (todoStorage) => {
     const [todoList, setTodoList] = useState(getList());
 
     useEffect(() => {
@@ -38,11 +27,11 @@ export const useTodoService = (todoStorage) => {
     }
 
     function getList() {
-        return todoStorage.getList();
+        return storage.getItem(storageKey, []);
     }
 
     function save(todoList) {
-        todoStorage.save(todoList);
+        storage.setItem(storageKey, todoList);
     }
 
     return {todoList, saveTodo, removeTodo, updateTodo}
