@@ -12,7 +12,7 @@ export const TodoInput = () => {
         $inputRef.current.focus();
     }, []);
 
-    const handleSubmitInput = event => {
+    const saveTodoItem = event => {
         event.preventDefault();
 
         if (!inputText) {
@@ -29,7 +29,7 @@ export const TodoInput = () => {
     }
 
     return (
-        <form className="add-items d-flex" onSubmit={handleSubmitInput}>
+        <form className="add-items d-flex" onSubmit={saveTodoItem}>
             <input type="text"
                    ref={$inputRef}
                    value={inputText}
