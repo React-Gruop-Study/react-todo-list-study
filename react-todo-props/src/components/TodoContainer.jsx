@@ -1,9 +1,9 @@
 import {TodoInput} from "./TodoInput";
 import {TodoList} from "./TodoList";
-import {useTodoList} from "../lib/TodoService";
+import {useTodoList} from "../hooks/useTodoList";
 
-export const TodoContainer = () => {
-    const todoList = useTodoList([]);
+export const TodoContainer = ({todoStorage}) => {
+    const todoList = useTodoList(todoStorage, []);
 
     const onSubmitInput = (todo) => todoList.add(todo);
     const onClickRemove = (todo) => todoList.remove(todo);

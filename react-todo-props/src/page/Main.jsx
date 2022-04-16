@@ -2,7 +2,9 @@ import '../assets/css/App.css';
 import {Layout} from "../layout/Layout";
 import {Header} from "../layout/Header";
 import {TodoContainer} from "../components/TodoContainer";
-import {todoStorage} from "../lib/TodoStorage";
+import {useTodoStorage} from "../hooks/useTodoStorage";
+
+const todoStorage = useTodoStorage();
 
 export const Main = () => {
 

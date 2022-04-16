@@ -1,4 +1,4 @@
-const TodoStorage = () => {
+export const useTodoStorage = () => {
     const STORAGE_KEY = 'todoList';
 
     const getList = () => {
@@ -8,7 +8,7 @@ const TodoStorage = () => {
 
     const save = todoList => localStorage.setItem(STORAGE_KEY, JSON.stringify(todoList));
 
-    return {getList, save};
+    return {
+        getList, save
+    };
 }
-
-export const todoStorage = TodoStorage();

@@ -1,19 +1,16 @@
 import {v4 as uuid} from "uuid";
 import {useEffect, useState} from "react";
-import {todoStorage} from "./TodoStorage";
 
-export const TodoService = (todoList) => {
+const TodoService = (todoList) => {
     return {
         add: (todo) => {
             const addTodo = {id: uuid(), checked: false, editState: false, ...todo};
 
             return [...todoList, addTodo];
-        },
-        remove: (todo) => {
+        }, remove: (todo) => {
             todoList.splice(todoList.indexOf(todo), 1);
             return [...todoList];
-        },
-        update: (old, newTodo) => {
+        }, update: (old, newTodo) => {
             const result = [...todoList];
             result.splice(result.indexOf(old), 1, {...old, ...newTodo});
             return result;
@@ -21,7 +18,7 @@ export const TodoService = (todoList) => {
     }
 }
 
-export const useTodoList = (initial) => {
+export const useTodoList = (todoStorage, initial) => {
     const initList = [...todoStorage.getList(), ...initial];
     const [todoList, setTodoList] = useState(initList);
     const todoService = TodoService(todoList);
@@ -35,9 +32,6 @@ export const useTodoList = (initial) => {
     const update = (old, newTodo) => setTodoList(todoService.update(old, newTodo));
 
     return {
-        add,
-        remove,
-        update,
-        items: todoList
+        add, remove, update, items: todoList
     }
 }
