@@ -1,27 +1,11 @@
-import {useRecoilState} from "recoil";
-import {todoListState} from "../recoil/todoListState";
+import {TodoInput} from "./TodoInput";
+import {TodoList} from "./TodoList";
 
 export const TodoContainer = () => {
-    const [todoList, setTodoList] = useRecoilState(todoListState);
-
     return (
         <>
+            <TodoInput/>
             <TodoList/>
-            {todoList.map(todo => <div key={todo.id}>{todo.message}</div>)}
-        </>
-    );
-}
-
-export const TodoList = () => {
-    const [todoList, setTodoList] = useRecoilState(todoListState);
-
-    const addTodoItem = e => {
-        setTodoList([...todoList, {message: 'test', id: todoList.length + 1}])
-    }
-
-    return (
-        <>
-            <button onClick={addTodoItem}>add</button>
         </>
     );
 }
