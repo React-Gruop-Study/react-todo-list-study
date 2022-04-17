@@ -1,8 +1,8 @@
-export class LocalStorage {
+export const storage = {
     getItem(key, defaultValue) {
         const result = JSON.parse(localStorage.getItem(key));
         return result ? result : defaultValue;
-    }
+    },
 
     setItem(key, value) {
         localStorage.setItem(key, JSON.stringify(value));
