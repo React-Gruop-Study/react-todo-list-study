@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {TodoModify} from "./TodoModify";
 import {useTodoContext} from "../hooks/useTodoContext";
-import {TodoService} from "../../utils/TodoService";
+import {TodoService} from "../../domain/TodoService";
 
 export const TodoItem = ({todo}) => {
     const {todoList, setTodoList} = useTodoContext();

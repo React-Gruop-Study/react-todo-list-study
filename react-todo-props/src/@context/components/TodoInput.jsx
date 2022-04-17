@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {useTodoContext} from "../hooks/useTodoContext";
-import {TodoService} from "../../utils/TodoService";
+import {TodoService} from "../../domain/TodoService";
 
 export const TodoInput = () => {
     const {todoList, setTodoList} = useTodoContext();
