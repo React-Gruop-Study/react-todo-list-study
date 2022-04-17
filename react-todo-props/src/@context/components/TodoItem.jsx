@@ -1,18 +1,25 @@
 import {useState} from "react";
 import {TodoModify} from "./TodoModify";
 import {useTodoContext} from "../hooks/useTodoContext";
+import {TodoService} from "../../utils/TodoService";
 
 export const TodoItem = ({todo}) => {
-    const {removeTodo, updateTodo} = useTodoContext();
-    const [checked, setChecked] = useState(todo.checked);
+    const {todoList, setTodoList} = useTodoContext();
 
-    const updateChecked = ({target: {checked}}) => {
+    const todoService = TodoService(todoList);
+
+    const [checked, setChecked] = useState(todo.checked || false);
+
+    const updateTodoChecked = ({target: {checked}}) => {
         setChecked(checked);
-        updateTodo(todo, {checked});
+
+        const result = todoService.updateTodo({...todo, checked});
+        setTodoList(result);
     }
 
     const removeTodoItem = () => {
-        removeTodo(todo);
+        const result = todoService.removeTodo(todo);
+        setTodoList(result);
     };
 
     return (
@@ -22,7 +29,7 @@ export const TodoItem = ({todo}) => {
                     <input className="checkbox"
                            type="checkbox"
                            checked={checked}
-                           onChange={updateChecked}
+                           onChange={updateTodoChecked}
                            role="todoChecked"/>
                     <i className="input-helper"/>
                 </label>

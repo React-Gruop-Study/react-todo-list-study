@@ -1,8 +1,11 @@
 import {useEffect, useRef, useState} from "react";
 import {useTodoContext} from "../hooks/useTodoContext";
+import {TodoService} from "../../utils/TodoService";
 
 export const TodoInput = () => {
-    const {saveTodo} = useTodoContext();
+    const {todoList, setTodoList} = useTodoContext();
+
+    const todoService = TodoService(todoList);
 
     const [inputText, setInputText] = useState('');
 
@@ -20,8 +23,10 @@ export const TodoInput = () => {
             return alert('할일을 입력하세요');
         }
 
-        saveTodo({memo: inputText});
         setInputText('');
+
+        const result = todoService.addTodo({memo: inputText});
+        setTodoList(result);
     }
 
     const onChange = ({target: {value}}) => {

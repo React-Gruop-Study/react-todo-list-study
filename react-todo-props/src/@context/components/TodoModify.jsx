@@ -1,13 +1,15 @@
 import {useState} from "react";
 import {useTodoContext} from "../hooks/useTodoContext";
+import {TodoService} from "../../utils/TodoService";
 
 export const TodoModify = ({todo}) => {
-    const {updateTodo} = useTodoContext();
+    const {todoList, setTodoList} = useTodoContext();
+    const todoService = TodoService(todoList);
 
     const [modifyAble, setModifyAble] = useState(false);
     const [modifyInput, setModifyInput] = useState('');
 
-    const toggleModifyAble = () => {
+    const toggleModify = () => {
         setModifyInput(todo.memo);
         setModifyAble(!modifyAble);
     }
@@ -20,12 +22,15 @@ export const TodoModify = ({todo}) => {
         e.preventDefault();
 
         if (!modifyInput) return alert('할 일을 입력하세요');
-        updateTodo(todo, {memo: modifyInput});
+
         setModifyAble(false);
+
+        const result = todoService.updateTodo({...todo, memo: modifyInput});
+        setTodoList(result);
     }
 
     if (!modifyAble) {
-        return <span onClick={toggleModifyAble}>{todo.memo}</span>;
+        return <span onClick={toggleModify}>{todo.memo}</span>;
     }
 
     return (
@@ -44,7 +49,7 @@ export const TodoModify = ({todo}) => {
 
                 <button type="button"
                         className="btn btn-sm btn-danger"
-                        onClick={toggleModifyAble}>
+                        onClick={toggleModify}>
                     취소
                 </button>
             </form>
